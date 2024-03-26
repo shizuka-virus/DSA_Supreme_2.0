@@ -1,0 +1,50 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+class Sloution{
+    public:
+    int St(vector<int>&nums,int target){
+        int ans=-1;
+        int fs=0;
+        int ls=0;
+        int st=0;
+        int en=nums.size()-1;
+        int mid=st+(en-st)/2;
+        while(st<=en){
+            if(nums[mid]==target){
+                fs=mid;
+                en=mid-1;
+            }
+            else if(nums[mid]<target){
+                st=mid+1;
+            }
+            else if(nums[mid]>target){
+                en=mid-1;
+            }
+            mid=st+(en-st)/2;
+        }
+        st=0;
+        en=nums.size()-1;
+         while(st<=en){
+            if(nums[mid]==target){
+                ls=mid;
+                st=mid+1;
+            }
+            else if(nums[mid]<target){
+                st=mid+1;
+            }
+            else if(nums[mid]>target){
+                en=mid-1;
+            }
+            mid=st+(en-st)/2;
+        }
+        ans=(ls-fs)+1;
+        return ans;
+    }
+};
+int main(){
+    vector<int> arr={2,3,4,4,4,4,4,4,5,6};
+    int target=4;
+    Sloution obj;
+    cout<<obj.St(arr,target);
+}
